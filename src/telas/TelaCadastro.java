@@ -1,5 +1,6 @@
 package telas;
 
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -34,6 +35,7 @@ public class TelaCadastro extends JInternalFrame implements ActionListener {
                 painelBotoes);
         painelBotoes.setLayout(
                 new GridLayout(1, 6));
+        painelComponentes.setLayout(new GridBagLayout());
         painelBotoes.add(jbIncluir);
         painelBotoes.add(jbAlterar);
         painelBotoes.add(jbExcluir);
