@@ -1,42 +1,19 @@
 package telas;
 
-import java.awt.GridBagConstraints;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
+import componentes.MeuCampoTexto;
 
 public class TelaCadastroPais extends TelaCadastro {
-   private JLabel jlCodigo = new JLabel("Código: ");
-   private JLabel jlNome = new JLabel("Nome: ");
-   private JLabel jlAtivo = new JLabel("Ativo: ");
-
-   private JTextField jtfCodigo = new JTextField(5);
-   private JTextField jtfNome = new JTextField(20);
-   private JTextField jtfAtivo = new JTextField(2);
+   private MeuCampoTexto jtfCodigo = new MeuCampoTexto("Código", 5, true);
+   private MeuCampoTexto jtfNome = new MeuCampoTexto("Nome", 20, true);
+   private MeuCampoTexto jtfAtivo = new MeuCampoTexto("Ativo", 2, false);
    
    public TelaCadastroPais() {
        super("Cadastro de País");
-       GridBagConstraints gbc = new GridBagConstraints();
-       gbc.gridy = 1;
-       gbc.gridx = 1;
-       gbc.gridheight = 1;
-       gbc.gridwidth = 1;
-       gbc.anchor = GridBagConstraints.WEST;
-       
-       painelComponentes.add(jlCodigo, gbc);
-       gbc.gridx = 2;
-       painelComponentes.add(jtfCodigo, gbc);
-       gbc.gridy = 2;
-       gbc.gridx = 1;
-       painelComponentes.add(jlNome, gbc);
-       gbc.gridx = 2;
-       gbc.gridwidth = 2;
-       painelComponentes.add(jtfNome, gbc);
-       gbc.gridwidth = 1;
-       gbc.gridy = 1;
-       gbc.gridx = 3;
-       painelComponentes.add(jlAtivo, gbc);
- //      painelComponentes.add(jtfAtivo);
+       adicionaComponente(jtfCodigo, 1, 2, 1, 1);
+       adicionaComponente(jtfNome, 2, 2, 1, 3);
+       adicionaComponente(jtfAtivo, 1, 4, 1, 1);
+//       mostraLinhasColunasComponentes();
+       pack();
        setVisible(true);
    }    
-
 }
