@@ -9,10 +9,11 @@ public class TelaCadastroPais extends TelaCadastro {
    
    public TelaCadastroPais() {
        super("Cadastro de País");
-       adicionaComponente(jtfCodigo, 1, 2, 1, 1);
-       adicionaComponente(jtfNome, 2, 2, 1, 3);
-       adicionaComponente(jtfAtivo, 1, 4, 1, 1);
+       adicionaCampo(jtfCodigo, 1, 2, 1, 1);
+       adicionaCampo(jtfNome, 2, 2, 1, 3);
+       adicionaCampo(jtfAtivo, 1, 4, 1, 1);
 //       mostraLinhasColunasComponentes();
+       habilitaCampos(false);
        pack();
        setVisible(true);
    }    

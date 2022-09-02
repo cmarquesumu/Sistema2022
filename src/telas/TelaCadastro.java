@@ -1,16 +1,18 @@
 package telas;
 
 import componentes.MeuCampoTexto;
-import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class TelaCadastro extends JInternalFrame implements ActionListener {
@@ -31,6 +33,7 @@ public class TelaCadastro extends JInternalFrame implements ActionListener {
     private JButton jbConfirmar = new JButton("Confirmar");
     private JButton jbCancelar = new JButton("Cancelar");
     private int qtdeLinhas, qtdeColunas;
+    private List<MeuCampoTexto> campos = new ArrayList();
 
     public TelaCadastro(String titulo) {
         super(titulo, true, true, true, true);
@@ -54,12 +57,11 @@ public class TelaCadastro extends JInternalFrame implements ActionListener {
         jbConsultar.addActionListener(this);
         jbConfirmar.addActionListener(this);
         jbCancelar.addActionListener(this);
-
         habilitaBotoes();
     }
 
-    public void adicionaComponente(
-            MeuCampoTexto componente, int linha, int coluna,
+    public void adicionaCampo(
+            MeuCampoTexto campo, int linha, int coluna,
             int linhas, int colunas) {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridy = linha;
@@ -68,15 +70,15 @@ public class TelaCadastro extends JInternalFrame implements ActionListener {
         gbc.gridwidth = colunas;
         gbc.anchor = GridBagConstraints.WEST;
         gbc.insets = new Insets(5, 5, 5, 5);
-        String textoLabel = "<html><body>" + componente.getNome();
-        if (componente.isObrigatorio()) {
+        String textoLabel = "<html><body>" + campo.getNome();
+        if (campo.isObrigatorio()) {
             textoLabel = textoLabel + "<font color=red>*</font>";
         }
         textoLabel = textoLabel + ": </body></html>";
         JLabel jl = new JLabel(textoLabel);
         painelComponentes.add(jl, gbc);
         gbc.gridx++;
-        painelComponentes.add(componente, gbc);
+        painelComponentes.add(campo, gbc);
         int l, c;
         l = linha + (linhas - 1);
         c = coluna + (colunas - 1);
@@ -86,8 +88,9 @@ public class TelaCadastro extends JInternalFrame implements ActionListener {
         if (qtdeColunas < c) {
             qtdeColunas = c;
         }
+        campos.add(campo);
     }
-    
+
     public void habilitaBotoes() {
         jbIncluir.setEnabled(estadoTela == PADRAO);
         jbAlterar.setEnabled(estadoTela == PADRAO
@@ -99,10 +102,24 @@ public class TelaCadastro extends JInternalFrame implements ActionListener {
         jbCancelar.setEnabled(estadoTela != PADRAO);
     }
 
+    public void habilitaCampos(boolean status) {
+//        for(int i = 0; i < campos.size(); i++) {
+//           campos.get(i).setEnabled(status);
+//        }
+
+        for (MeuCampoTexto campo : campos) {
+            campo.setEnabled(status);
+        }
+        if (status == true && campos.size() > 0) {
+            campos.get(0).requestFocus();
+        }
+    }
+
     @Override
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == jbIncluir) {
             estadoTela = INCLUINDO;
+            habilitaCampos(true);
         } else if (ae.getSource() == jbAlterar) {
             estadoTela = ALTERANDO;
         } else if (ae.getSource() == jbExcluir) {
@@ -110,11 +127,31 @@ public class TelaCadastro extends JInternalFrame implements ActionListener {
         } else if (ae.getSource() == jbConsultar) {
             estadoTela = CONSULTANDO;
         } else if (ae.getSource() == jbConfirmar) {
-            estadoTela = PADRAO;
+            if (validaCampos()) {
+                estadoTela = PADRAO;
+                habilitaCampos(false);
+            }
         } else if (ae.getSource() == jbCancelar) {
             estadoTela = PADRAO;
+            habilitaCampos(false);
         }
         habilitaBotoes();
     }
 
+    public boolean validaCampos() {
+        String errosObrigatorio = "";
+        for (MeuCampoTexto campo : campos) {
+            if (campo.isObrigatorio() && campo.getText().isEmpty()) {
+                errosObrigatorio += campo.getNome() + "\n";
+            }
+        }
+        if (errosObrigatorio.isEmpty()) {
+            return true;
+        } else {
+            errosObrigatorio = "Os campos abaixo são obrigatórios\n"
+                    + "e não foram preenchidos:\n\n" + errosObrigatorio;
+            JOptionPane.showMessageDialog(null, errosObrigatorio);
+            return false;
+        }
+    }
 }
