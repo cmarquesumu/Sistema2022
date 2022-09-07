@@ -7,7 +7,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 
-public class MeuCampoTexto extends JTextField {
+public class MeuCampoTexto extends JTextField implements MeuComponente {
 
     private String nome;
     private boolean  obrigatorio;
@@ -20,12 +20,24 @@ public class MeuCampoTexto extends JTextField {
         adicionaFocusListener();
     }
     
+    @Override
     public String getNome() {
         return nome;
     }
     
+    @Override
     public boolean isObrigatorio() {
         return obrigatorio;
+    }
+    
+    @Override
+    public String getValor() {
+        return getText().trim();
+    }
+    
+    @Override
+    public boolean isVazio() {
+        return getValor().isEmpty();
     }
     
     public void adicionaFocusListener() {
