@@ -42,4 +42,9 @@ public class MeuCampoSimNao extends JPanel implements MeuComponente {
     public boolean isVazio() {
         return false;
     }
+
+    @Override
+    public boolean isValido() {
+        return true;
+    }
 }

@@ -57,4 +57,9 @@ public class MeuCampoTexto extends JTextField implements MeuComponente {
            }              
         });
     }
+
+    @Override
+    public boolean isValido() {
+        return true;
+    }
 }

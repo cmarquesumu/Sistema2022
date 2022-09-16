@@ -61,8 +61,28 @@ public class MeuCampoCEP extends JFormattedTextField implements MeuComponente {
 
     @Override
     public boolean isVazio() {
-        System.out.println(getValor());
-        System.out.println(getValor().equals("_____-___"));
         return getValor().equals("_____-___");
+    }
+
+    @Override
+    public boolean isValido() {
+//       int tamanho = getValor().replace("-", "").replace("_", "").length();
+//       if (tamanho == 8) {
+//           return true;
+//       } else {
+//           return false;
+//       }
+
+//        return getValor().replace("-", "").replace("_", "").length() == 8;
+        
+       String v1 = getValor();
+       String v2 = v1.replace("-", "");
+       String v3 = v2.replace("_", "");
+       int n = v3.length();
+       if (n == 8) {
+           return true;
+       } else {
+           return false;
+       }
     }
 }

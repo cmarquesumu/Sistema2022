@@ -5,4 +5,5 @@ public interface MeuComponente {
    public boolean isObrigatorio(); 
    public boolean isVazio();
    public String getValor();
+   public boolean isValido();
 }
