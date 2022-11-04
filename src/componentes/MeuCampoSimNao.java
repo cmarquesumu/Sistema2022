@@ -47,4 +47,9 @@ public class MeuCampoSimNao extends JPanel implements MeuComponente {
     public boolean isValido() {
         return true;
     }
+
+    @Override
+    public void limpar() {
+        jrbSim.setSelected(true);
+    }
 }

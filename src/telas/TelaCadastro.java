@@ -1,6 +1,5 @@
 package telas;
 
-import componentes.MeuCampoTexto;
 import componentes.MeuComponente;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -17,7 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class TelaCadastro extends JInternalFrame implements ActionListener {
+public abstract class TelaCadastro extends JInternalFrame implements ActionListener {
 
     protected final int PADRAO = 0;
     protected final int INCLUINDO = 1;
@@ -95,10 +94,8 @@ public class TelaCadastro extends JInternalFrame implements ActionListener {
 
     public void habilitaBotoes() {
         jbIncluir.setEnabled(estadoTela == PADRAO);
-        jbAlterar.setEnabled(estadoTela == PADRAO
-                && temDadosNaTela);
-        jbExcluir.setEnabled(estadoTela == PADRAO
-                && temDadosNaTela);
+        jbAlterar.setEnabled(estadoTela == PADRAO && temDadosNaTela);
+        jbExcluir.setEnabled(estadoTela == PADRAO && temDadosNaTela);
         jbConsultar.setEnabled(estadoTela == PADRAO);
         jbConfirmar.setEnabled(estadoTela != PADRAO);
         jbCancelar.setEnabled(estadoTela != PADRAO);
@@ -117,6 +114,12 @@ public class TelaCadastro extends JInternalFrame implements ActionListener {
         }
     }
 
+    public void limpaCampos() {
+        for (MeuComponente campo : campos) {
+            campo.limpar();
+        }
+    }    
+    
     @Override
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == jbIncluir) {
@@ -124,14 +127,33 @@ public class TelaCadastro extends JInternalFrame implements ActionListener {
             habilitaCampos(true);
         } else if (ae.getSource() == jbAlterar) {
             estadoTela = ALTERANDO;
+            habilitaCampos(true);
         } else if (ae.getSource() == jbExcluir) {
             estadoTela = EXCLUINDO;
         } else if (ae.getSource() == jbConsultar) {
             estadoTela = CONSULTANDO;
         } else if (ae.getSource() == jbConfirmar) {
             if (validaCampos()) {
-                estadoTela = PADRAO;
-                habilitaCampos(false);
+                if (estadoTela == INCLUINDO) {
+                    if (incluir() == true) {
+                        habilitaCampos(false);
+                        estadoTela = PADRAO;
+                        temDadosNaTela = true;
+                    }
+                } else if (estadoTela == ALTERANDO) {
+                    if (alterar() == true) {
+                        habilitaCampos(false);
+                        estadoTela = PADRAO;
+                        temDadosNaTela = true;
+                    }
+                } else if (estadoTela == EXCLUINDO) {
+                    if (excluir() == true) {
+                        habilitaCampos(false);
+                        limpaCampos();
+                        estadoTela = PADRAO;
+                        temDadosNaTela = true;
+                    }
+                }
             }
         } else if (ae.getSource() == jbCancelar) {
             estadoTela = PADRAO;
@@ -139,6 +161,14 @@ public class TelaCadastro extends JInternalFrame implements ActionListener {
         }
         habilitaBotoes();
     }
+
+    abstract public boolean incluir();
+
+    abstract public boolean alterar();
+
+    abstract public boolean excluir();
+
+    abstract public boolean consultar();
 
     public boolean validaCampos() {
         String errosObrigatorio = "";

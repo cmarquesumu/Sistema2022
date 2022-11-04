@@ -36,5 +36,5 @@ public class Estado {
 
     public void setAtivoEstado(char ativoEstado) {
         this.ativoEstado = ativoEstado;
-    }   
+    }
 }

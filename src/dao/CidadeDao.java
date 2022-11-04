@@ -80,49 +80,49 @@ public class CidadeDao {
     }
 }
 
-class TesteCidadeDao {
-
-    public static void main(String args[]) {
-        Cidade cidade = new Cidade();
-        CidadeDao cidadeDao = new CidadeDao();
-        String id = JOptionPane.showInputDialog(null, "Informe o Id");
-        String nome = JOptionPane.showInputDialog(null, "Informe o Nome");
-        String idEstado = JOptionPane.showInputDialog(null, "Informe o Id do Estado");
-        String ativo = JOptionPane.showInputDialog(null, "Informe se está ativo", "S");
-
-        cidade.setIdCidade(Integer.parseInt(id));
-        cidade.setNomeCidade(nome);
-        cidade.setIdEstado(Integer.parseInt("0" + idEstado));
-        cidade.setAtivoCidade(ativo.charAt(0));
-
-        String operacao = JOptionPane.showInputDialog(null, "Você quer (I)ncluir, (A)lterar, (E)xcluir ou (C)onsultar?", "C");
-
-        boolean resultado;
-        switch (operacao.toUpperCase().charAt(0)) {
-            case 'I':
-                resultado = cidadeDao.incluir(cidade);
-                break;
-            case 'A':
-                resultado = cidadeDao.alterar(cidade);
-                break;
-            case 'E':
-                resultado = cidadeDao.excluir(cidade);
-                break;
-            case 'C':
-                resultado = cidadeDao.consultar(cidade);
-                break;
-            default:
-                System.out.println("Operação inválida");
-                return;
-        }
-        if (resultado == true) {
-            System.out.println("OPERAÇÃO " + operacao.toUpperCase() + " efetuada com sucesso!!!");
-            System.out.println("ID: " + cidade.getIdCidade());
-            System.out.println("NOME: " + cidade.getNomeCidade());
-            System.out.println("SIGLA: " + cidade.getIdEstado());
-            System.out.println("ATIVO: " + cidade.getAtivoCidade());
-        } else {
-            System.out.println("Erro ao tentar executar a operação no banco de dados");
-        }
-    }
-}
+//class TesteCidadeDao {
+//
+//    public static void main(String args[]) {
+//        Cidade cidade = new Cidade();
+//        CidadeDao cidadeDao = new CidadeDao();
+//        String id = JOptionPane.showInputDialog(null, "Informe o Id");
+//        String nome = JOptionPane.showInputDialog(null, "Informe o Nome");
+//        String idEstado = JOptionPane.showInputDialog(null, "Informe o Id do Estado");
+//        String ativo = JOptionPane.showInputDialog(null, "Informe se está ativo", "S");
+//
+//        cidade.setIdCidade(Integer.parseInt(id));
+//        cidade.setNomeCidade(nome);
+//        cidade.setIdEstado(Integer.parseInt("0" + idEstado));
+//        cidade.setAtivoCidade(ativo.charAt(0));
+//
+//        String operacao = JOptionPane.showInputDialog(null, "Você quer (I)ncluir, (A)lterar, (E)xcluir ou (C)onsultar?", "C");
+//
+//        boolean resultado;
+//        switch (operacao.toUpperCase().charAt(0)) {
+//            case 'I':
+//                resultado = cidadeDao.incluir(cidade);
+//                break;
+//            case 'A':
+//                resultado = cidadeDao.alterar(cidade);
+//                break;
+//            case 'E':
+//                resultado = cidadeDao.excluir(cidade);
+//                break;
+//            case 'C':
+//                resultado = cidadeDao.consultar(cidade);
+//                break;
+//            default:
+//                System.out.println("Operação inválida");
+//                return;
+//        }
+//        if (resultado == true) {
+//            System.out.println("OPERAÇÃO " + operacao.toUpperCase() + " efetuada com sucesso!!!");
+//            System.out.println("ID: " + cidade.getIdCidade());
+//            System.out.println("NOME: " + cidade.getNomeCidade());
+//            System.out.println("SIGLA: " + cidade.getIdEstado());
+//            System.out.println("ATIVO: " + cidade.getAtivoCidade());
+//        } else {
+//            System.out.println("Erro ao tentar executar a operação no banco de dados");
+//        }
+//    }
+//}
