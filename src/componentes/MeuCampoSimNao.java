@@ -37,6 +37,15 @@ public class MeuCampoSimNao extends JPanel implements MeuComponente {
             return "Não";
         }
     }
+    
+    @Override
+    public void setValor(Object valor) {
+        if (((String)valor).equals("Sim")) {
+            jrbSim.setSelected(true);
+        } else {
+            jrbNao.setSelected(true);
+        }
+    }    
 
     @Override
     public boolean isVazio() {

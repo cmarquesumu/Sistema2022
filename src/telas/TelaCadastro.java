@@ -132,6 +132,7 @@ public abstract class TelaCadastro extends JInternalFrame implements ActionListe
             estadoTela = EXCLUINDO;
         } else if (ae.getSource() == jbConsultar) {
             estadoTela = CONSULTANDO;
+            consultar();
         } else if (ae.getSource() == jbConfirmar) {
             if (validaCampos()) {
                 if (estadoTela == INCLUINDO) {
@@ -197,5 +198,11 @@ public abstract class TelaCadastro extends JInternalFrame implements ActionListe
         } else {
             return false;
         }
+    }
+    
+    public void preencherDados(int pk) {
+        estadoTela = PADRAO;
+        temDadosNaTela = true;
+        habilitaBotoes();
     }
 }

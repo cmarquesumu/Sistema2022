@@ -58,6 +58,11 @@ public class MeuCampoCEP extends JFormattedTextField implements MeuComponente {
     public String getValor() {
         return getText();
     }
+    
+    @Override
+    public void setValor(Object valor) {
+        setText((String) valor);
+    }
 
     @Override
     public boolean isVazio() {

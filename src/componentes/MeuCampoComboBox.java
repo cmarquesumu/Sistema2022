@@ -41,6 +41,16 @@ public class MeuCampoComboBox extends JComboBox implements MeuComponente {
     }
 
     @Override
+    public void setValor(Object valor) {
+        for (int i = 0; i < opcoes.length; i++) {
+            if ((int) opcoes[i][0] == (int) valor) {
+                setSelectedIndex(i+1);
+                return;
+            }
+        }        
+    }    
+
+    @Override
     public boolean isVazio() {
         return getSelectedIndex() <= 0;
     }

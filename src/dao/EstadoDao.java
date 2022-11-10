@@ -11,6 +11,7 @@ public class EstadoDao {
     public final String SQL_ALTERAR = "UPDATE ESTADO SET NOME_ESTADO = ?, SIGLA_ESTADO = ?, ATIVO_ESTADO = ? WHERE ID_ESTADO = ?";
     public final String SQL_EXCLUIR = "DELETE FROM ESTADO WHERE ID_ESTADO = ?";
     public final String SQL_CONSULTAR = "SELECT * FROM ESTADO WHERE ID_ESTADO = ?";
+    public final static String SQL_PESQUISAR = "SELECT * FROM ESTADO ORDER BY NOME_ESTADO";
 
     public boolean incluir(Estado estado) {
         try {

@@ -34,6 +34,11 @@ public class MeuCampoTexto extends JTextField implements MeuComponente {
     public String getValor() {
         return getText().trim();
     }
+
+    @Override
+    public void setValor(Object valor) {
+        setText((String) valor);
+    }
     
     @Override
     public boolean isVazio() {

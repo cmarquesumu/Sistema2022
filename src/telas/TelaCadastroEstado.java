@@ -61,6 +61,21 @@ public class TelaCadastroEstado extends TelaCadastro {
 
     @Override
     public boolean consultar() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        new TelaConsulta(this,
+                "Consulta de Estado",
+                new String[]{"Código", "Nome", "Sigla", "Ativo"},
+                EstadoDao.SQL_PESQUISAR);
+        return true;
+    }
+
+    @Override
+    public void preencherDados(int id) {
+      estado.setIdEstado(id);
+      estadoDao.consultar(estado);
+      mctCodigo.setValor("" + estado.getIdEstado());
+      mctNome.setValor(estado.getNomeEstado());
+      mctSigla.setValor(estado.getSiglaEstado());
+      mcsnAtivo.setValor(estado.getAtivoEstado() == 'S' ? "Sim" : "Não");
+      super.preencherDados(id);
     }
 }

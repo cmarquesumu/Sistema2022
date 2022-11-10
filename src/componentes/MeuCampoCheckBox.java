@@ -28,6 +28,11 @@ public class MeuCampoCheckBox extends JCheckBox implements MeuComponente {
             return "Não";
         }
     }
+    
+    @Override
+    public void setValor(Object valor) {
+        setSelected((boolean) valor);
+    }
 
     @Override
     public boolean isVazio() {
