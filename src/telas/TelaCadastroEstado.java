@@ -76,6 +76,12 @@ public class TelaCadastroEstado extends TelaCadastro {
       mctNome.setValor(estado.getNomeEstado());
       mctSigla.setValor(estado.getSiglaEstado());
       mcsnAtivo.setValor(estado.getAtivoEstado() == 'S' ? "Sim" : "Não");
+      
+//      if (estado.getAtivoEstado() == 'S') {
+//          mcsnAtivo.setValor("Sim");
+//      } else {
+//          mcsnAtivo.setValor("Não");
+//      }
       super.preencherDados(id);
     }
 }
