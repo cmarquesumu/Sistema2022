@@ -12,7 +12,8 @@ public class CidadeDao {
     public final String SQL_ALTERAR = "UPDATE CIDADE SET NOME_CIDADE = ?, ID_ESTADO = ?, ATIVO_CIDADE = ? WHERE ID_CIDADE = ?";
     public final String SQL_EXCLUIR = "DELETE FROM CIDADE WHERE ID_CIDADE = ?";
     public final String SQL_CONSULTAR = "SELECT * FROM CIDADE WHERE ID_CIDADE = ?";
-
+    public static final String SQL_PESQUISAR = "SELECT ID_CIDADE, NOME_CIDADE, SIGLA_ESTADO, ATIVO_CIDADE FROM CIDADE JOIN ESTADO ON CIDADE.ID_ESTADO = ESTADO.ID_ESTADO ORDER BY NOME_CIDADE";
+    
     public boolean incluir(Cidade cidade) {
         try {
             cidade.setIdCidade(Conexao.getGenerator("G_CIDADE"));
@@ -66,7 +67,7 @@ public class CidadeDao {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 cidade.setNomeCidade(rs.getString("NOME_CIDADE"));
-                cidade.setIdEstado(rs.getInt("SIGLA_CIDADE"));
+                cidade.setIdEstado(rs.getInt("ID_ESTADO"));
                 cidade.setAtivoCidade(rs.getString("ATIVO_CIDADE").charAt(0));
                 return true;
             } else {

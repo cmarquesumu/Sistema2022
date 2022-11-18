@@ -124,6 +124,7 @@ public abstract class TelaCadastro extends JInternalFrame implements ActionListe
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == jbIncluir) {
             estadoTela = INCLUINDO;
+            limpaCampos();
             habilitaCampos(true);
         } else if (ae.getSource() == jbAlterar) {
             estadoTela = ALTERANDO;

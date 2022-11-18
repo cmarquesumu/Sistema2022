@@ -10,12 +10,12 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
 public class TelaSistema extends JFrame implements ActionListener {
+
     public static JDesktopPane jdp = new JDesktopPane();
     private JMenuBar jmb = new JMenuBar();
     private JMenu jmCadastros = new JMenu("Cadastros");
     private JMenu jmMovimentos = new JMenu("Movimentos");
     private JMenu jmRelatorios = new JMenu("Relatórios");
-    private JMenuItem jmiPais = new JMenuItem("País");
     private JMenuItem jmiEstado = new JMenuItem("Estado");
     private JMenuItem jmiCidade = new JMenuItem("Cidade");
     private JMenuItem jmiFornecedor = new JMenuItem("Fornecedor");
@@ -23,12 +23,11 @@ public class TelaSistema extends JFrame implements ActionListener {
     public TelaSistema(String titulo) {
         setTitle(titulo);
         getContentPane().add(jdp);
-        jdp.setBackground(Color.yellow);
+        jdp.setBackground(Color.gray);
         setJMenuBar(jmb);
         jmb.add(jmCadastros);
         jmb.add(jmMovimentos);
         jmb.add(jmRelatorios);
-        adicionarItemMenu(jmCadastros, jmiPais);
         adicionarItemMenu(jmCadastros, jmiEstado);
         adicionarItemMenu(jmCadastros, jmiCidade);
         adicionarItemMenu(jmCadastros, jmiFornecedor);
@@ -37,7 +36,7 @@ public class TelaSistema extends JFrame implements ActionListener {
         setDefaultCloseOperation(
                 JFrame.EXIT_ON_CLOSE);
     }
-    
+
     private void adicionarItemMenu(JMenu menu, JMenuItem itemMenu) {
         menu.add(itemMenu);
         itemMenu.addActionListener(this);
@@ -45,21 +44,17 @@ public class TelaSistema extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-        if (ae.getSource() == jmiPais) {
-            TelaCadastroPais telaCadastroPais = 
-                    new TelaCadastroPais();
-            jdp.add(telaCadastroPais);
-        } else if (ae.getSource() == jmiEstado) {
-            TelaCadastroEstado telaCadastroEstado = 
-                    new TelaCadastroEstado();
+        if (ae.getSource() == jmiEstado) {
+            TelaCadastroEstado telaCadastroEstado
+                    = new TelaCadastroEstado();
             jdp.add(telaCadastroEstado);
         } else if (ae.getSource() == jmiCidade) {
-            TelaCadastroCidade telaCadastroCidade = 
-                    new TelaCadastroCidade();
+            TelaCadastroCidade telaCadastroCidade
+                    = new TelaCadastroCidade();
             jdp.add(telaCadastroCidade);
         } else if (ae.getSource() == jmiFornecedor) {
-            TelaCadastroFornecedor telaCadastroFornecedor = 
-                    new TelaCadastroFornecedor();
+            TelaCadastroFornecedor telaCadastroFornecedor
+                    = new TelaCadastroFornecedor();
             jdp.add(telaCadastroFornecedor);
         }
     }
